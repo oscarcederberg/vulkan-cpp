@@ -904,19 +904,19 @@ private:
         auto availableLayerNames = std::vector<const char*>{};
         std::transform(availableLayers.begin(), availableLayers.end(), back_inserter(availableLayerNames), [](const VkLayerProperties& l){ return l.layerName;});
         
-        std::cout << "required layers:" << std::endl;
-        for (const char* layer : validationLayers) {
-            std::cout << '\t' << layer << '\n';
-        }
+        // std::cout << "required layers:" << std::endl;
+        // for (const char* layer : validationLayers) {
+        //     std::cout << '\t' << layer << '\n';
+        // }
 
-        std::cout << "available extensions:" << std::endl;
-        for (const char* layer : availableLayerNames) {
-            std::cout << '\t' << layer << '\n';
-        }
+        // std::cout << "available extensions:" << std::endl;
+        // for (const char* layer : availableLayerNames) {
+        //     std::cout << '\t' << layer << '\n';
+        // }
 
         for (const char* layer : validationLayers) {
             if (!contains(availableLayerNames, layer)){
-                std::cerr << layer << std::endl;
+                std::cerr << layer << " is not supported!" << std::endl;
                 return false;
             }
         }
@@ -924,10 +924,8 @@ private:
         return true;
     }
 
-    static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
-        VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
-        VkDebugUtilsMessageSeverityFlagsEXT messageType,
-        const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
+    static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
+        VkDebugUtilsMessageSeverityFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
         void* pUserData) {
             std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
 
