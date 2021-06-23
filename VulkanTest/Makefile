@@ -7,7 +7,7 @@ VulkanTest: main.cpp
 .PHONY: test clean
 
 test: VulkanTest
-	./VulkanTest
+	./VulkanTest.out
 
 clean:
-	rm -f VulkanTest
+	rm -f VulkanTest.out
